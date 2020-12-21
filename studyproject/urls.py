@@ -18,6 +18,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('', include('blog1.urls')),
-    path('admin/', admin.site.urls),
-    path('blog1', include('blog1.urls')),
+    path('admin/', admin.site.urls), #URL Reverse (path를 변경해도 알아서 장고에서 매핑됌)
+    path('blog1/', include('blog1.urls')),
+    path('instagram/', include('instagram.urls')),
 ]
