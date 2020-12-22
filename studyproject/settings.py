@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -121,3 +123,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+#STATIC_ROOT = '' #TODO
+
+
+#media 파일 default setting
+MEDIA_URL = '/media/' #파일의 url 접근시 사용되는 설정
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #업로드시 사용되는 설정
+# MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'public', 'media') #프로젝트 경로에서 한단계 위로 간 후 public내의 media
