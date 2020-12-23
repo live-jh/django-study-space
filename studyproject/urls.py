@@ -17,16 +17,23 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from django.conf import settings # from 프로젝트명 import settings + django.conf import global_settings 의 합친 역할
+from django.conf import settings  # from 프로젝트명 import settings + django.conf import global_settings 의 합친 역할
 
 urlpatterns = [
     path('', include('blog1.urls')),
-    path('admin/', admin.site.urls), #URL Reverse (path를 변경해도 알아서 장고에서 매핑됌)
+    path('admin/', admin.site.urls),  # URL Reverse (path를 변경해도 알아서 장고에서 매핑됌)
     path('blog1/', include('blog1.urls')),
     path('instagram/', include('instagram.urls')),
 ]
 
+# debug toolbar 추가
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-#settings.MEDIA_URL
-#settings.MEDIA_ROOT
+
+    import debug_toolbar
+
+    urlpatterns += [
+        path('__debug__/', include(debug_toolbar.urls))
+    ]
+# settings.MEDIA_URL
+# settings.MEDIA_ROOT
