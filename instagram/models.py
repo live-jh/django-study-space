@@ -13,6 +13,7 @@ class Post(models.Model):
     is_public = models.BooleanField(default=False, verbose_name="공개여부")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    tag_set = models.ManyToManyField('Tag', blank=True)
 
     # java의 toString과 같은 역할
     # def __str__(self):
@@ -31,3 +32,10 @@ class Comment(models.Model):
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.name
