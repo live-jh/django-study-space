@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),  # URL Reverse (path를 변경해도 알아서 장고에서 매핑됌)
     path('blog1/', include('blog1.urls')),
     path('instagram/', include('instagram.urls')),
+    path('accounts/', include('accounts.urls')),
 ]
 
 # debug toolbar 추가

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Post
+from .models import Post, Comment
 
 
 # Register your models here.
@@ -30,3 +30,8 @@ class PostAdmin(admin.ModelAdmin):  # 3번 방법
     # admin에서도 함수 구현 가능
     def message_length(self, post):
         return f"{len(post.message)} 글자 입니다."
+
+
+@admin.register(Comment)
+class PostAdmin(admin.ModelAdmin):
+    pass

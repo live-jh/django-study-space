@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     #third apps
     'debug_toolbar',
     #local apps
+    'accounts',
     'blog1',
     'instagram'
 ]
@@ -137,3 +138,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #업로드시 사용되는 설정
 
 # debut_toolbar
 INTERNAL_IPS = ['127.0.0.1']
+
+#user model setting
+# AUTH_USER_MODEL = 'instagram.User'
