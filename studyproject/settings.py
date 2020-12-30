@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #third apps
     'debug_toolbar',
+    'django_extensions',
+    'bootstrap4',
     #local apps
     'accounts',
     'blog1',
@@ -63,8 +65,9 @@ ROOT_URLCONF = 'studyproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [
+            os.path.join(BASE_DIR, 'studyproject', 'templates'), #이름을 다른걸로 변경해도 무관, 앱의 templates는 이름변경하지 않는다
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
