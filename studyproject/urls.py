@@ -19,7 +19,12 @@ from django.urls import path, include
 
 from django.conf import settings  # from 프로젝트명 import settings + django.conf import global_settings 의 합친 역할
 
+api_v1_patterns = [
+
+]
+
 urlpatterns = [
+    # path('api/v1/', include(api_v1_patterns)),
     path('', include('blog1.urls')),
     path('admin/', admin.site.urls),  # URL Reverse (path를 변경해도 알아서 장고에서 매핑됌)
     path('blog1/', include('blog1.urls')),
