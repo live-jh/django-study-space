@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>latest</title>
+</head>
+<body>
+<h2>latest</h2>
+<span>{{ latest }}</span>
+<h2>date_list</h2>
+{#    <span>{{ date_list }}</span>#}
+{% for date in date_list %}
+    <span>{{ date.year }}</span>
+    <span>{{ date|date:"Y" }}</span> {# 장고 템플릿 함수문법에서 filter함수 값|date함수:"인자값 ex:Y" #}
+{% endfor %}
+</body>
+</html>

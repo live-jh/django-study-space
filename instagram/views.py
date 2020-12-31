@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpRequest, Http404
 from django.shortcuts import render, get_object_or_404
 from django.utils.decorators import method_decorator
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, ArchiveIndexView, YearArchiveView
 from .models import Post, Comment
 
 
@@ -28,8 +28,6 @@ class PostListView(ListView):
 
 
 post_list = PostListView.as_view()
-
-
 # post_list = ListView.as_view(model=Post, paginate_by=10) #ListView 활용 paginate_by-> 페이지별 row 갯수 설정 (search 불가) , login_required()로 감싸기
 
 
@@ -51,7 +49,6 @@ post_list = PostListView.as_view()
 # DetailVIew query_set변경 (유저일때 보이기 처리)
 class PostDetailView(DetailView):
     model = Post
-
     # queryset = Post.objects.filter(is_public=True)
 
     def get_queryset(self):
@@ -63,8 +60,6 @@ class PostDetailView(DetailView):
 
 
 post_detail = PostDetailView.as_view()
-
-
 # post_detail = DetailView.as_view(model=Post, queryset=Post.objects.filter(is_public=True))  # 쿼리셋을 보낼 수도 있다.
 
 
@@ -89,5 +84,7 @@ post_detail = PostDetailView.as_view()
 #     })
 
 
-def archives_year(request, year):
-    return HttpResponse(f"{year}년")
+post_archive = ArchiveIndexView.as_view(model=Post, date_field='created_at', paginate_by=10)
+post_archive_year = YearArchiveView.as_view(model=Post, date_field='created_at', make_object_list=True) #make_object default false이고 True로 해야 출력됌
+# def archives_year(request, year):
+#     return HttpResponse(f"{year}년")
