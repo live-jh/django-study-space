@@ -15,6 +15,7 @@ from .models import Post, Comment, Tag
 # admin.site.register(Post, PostAdmin)
 
 
+#admin은 내부적으로 ModelForm을 사용하는데 아래 클래스에 재정의해서 사용 가능
 @admin.register(Post)  # 래핑
 class PostAdmin(admin.ModelAdmin):  # 3번 방법
     list_display = ['pk', 'img_tag', 'message', 'message_length', 'is_public', 'created_at', 'updated_at']

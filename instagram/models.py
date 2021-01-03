@@ -1,17 +1,16 @@
 from django.conf import settings  # settings에 설정 후 지정하기
 from django.db import models
-
-
 # from django.contrib.auth.models import User -> 좋지 않은 유저 모델 (유저모델은 변경될수도 있기 때문)
-
-
 # Create your models here.
 from django.urls import reverse
+from django.core.validators import MinLengthValidator
 
 
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    message = models.TextField()
+    message = models.TextField(
+        validators=[MinLengthValidator(10)]
+    )
     post_img = models.ImageField(blank=True, upload_to="instagram/post/%Y/%m%d")
     is_public = models.BooleanField(default=False, verbose_name="공개여부")
     created_at = models.DateTimeField(auto_now_add=True)

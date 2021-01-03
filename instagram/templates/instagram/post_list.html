@@ -8,11 +8,12 @@
 {% endblock title %}
 
 {% block content %}
+    <form action="" method="get">
+        <input type="text" name="q" value="{{ q }}">
+        <input type="submit">
+    </form>
+    <a class="btn btn-primary mt-3 mb-3 btn-block" href="{% url 'instagram:post_new' %}">포스트 작성</a>
     <table class="table table-bordered table-hover">
-        <form action="" method="get">
-            <input type="text" name="q" value="{{ q }}">
-            <input type="submit">
-        </form>
         {% for post in post_list %}
             <tr>
                 <td>
