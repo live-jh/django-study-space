@@ -6,5 +6,9 @@ from instagram.models import Post
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = '__all__'
-      
+        fields = [
+            'message',
+            'post_img',
+            'tag_set',
+            'is_public',
+        ]
