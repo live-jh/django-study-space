@@ -12,7 +12,8 @@
             <img style="width: 200px" src="{{ post.post_img.url }}"/>
         </div>
     {% endif %}
-    <span>{{ post.message }}</span>
+    <span>{{ post.message|linebreaks }}</span> <!-- 개행 -->
     <hr>
     <a href="{% url "instagram:post_list" %}" class="btn btn-primary">목록</a>
+    <a href="{% url "instagram:post_edit" post.pk %}" class="btn btn-success">수정</a>
 {% endblock content %}

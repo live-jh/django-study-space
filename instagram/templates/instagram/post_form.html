@@ -1,5 +1,5 @@
 <form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
+    {% csrf_token %} <!-- 기본세팅으로 CsrfToken 설정 -->
     <table>
         {{ form }}
     </table>

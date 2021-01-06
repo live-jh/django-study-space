@@ -12,9 +12,9 @@ from .models import Post, Comment
 
 def post_new(request):
     if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES) #두번째 인자가 존재하지 않으면 그대로 POST만 저장
+        form = PostForm(request.POST, request.FILES)  # 두번째 인자가 존재하지 않으면 그대로 POST만 저장
         if form.is_valid():
-            post = form.save()
+            post = form.save()  # default commit=True 설정, False시 save 호출 작동 안함(저장 안됌)
             return redirect(post)
     else:
         form = PostForm()
@@ -105,5 +105,19 @@ post_detail = PostDetailView.as_view()
 post_archive = ArchiveIndexView.as_view(model=Post, date_field='created_at', paginate_by=10)
 post_archive_year = YearArchiveView.as_view(model=Post, date_field='created_at',
                                             make_object_list=True)  # make_object default false이고 True로 해야 출력됌
+
+
 # def archives_year(request, year):
 #     return HttpResponse(f"{year}년")
+def post_edit(request, pk):
+    post = get_object_or_404(Post, id=pk)
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)  # update시 instance= 로 모델 인스턴스 전달
+        if form.is_valid():
+            post = form.save()  # default commit=True 설정, False시 save 호출 작동 안함(저장 안됌)
+            return redirect(post)
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'instagram/post_form.html', {
+        'form': form
+    })
