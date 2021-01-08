@@ -1,7 +1,16 @@
-<form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %} <!-- 기본세팅으로 CsrfToken 설정 -->
-    <table>
-        {{ form }}
-    </table>
-    <input type="submit" value="save"/>
-</form>
+{% extends "instagram/layout.html" %}
+
+{% block content %}
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %} <!-- 기본세팅으로 CsrfToken 설정 -->
+        <table>
+            {{ form }}
+        </table>
+        <input type="submit" value="save"/>
+    </form>
+    <hr>
+    {% if form.instance %}
+        <a href="{{ form.instance.get_absolute_url }}" class="btn btn-success">내용으로</a>
+    {% endif %}
+    <a href="{% url "instagram:post_list" %}" class="btn btn-danger">목록</a>
+{% endblock %}

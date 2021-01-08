@@ -10,14 +10,16 @@ from django.views.generic import ListView, DetailView, ArchiveIndexView, YearArc
 from .forms import PostForm
 from .models import Post, Comment
 
+
 @login_required
 def post_new(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)  # 두번째 인자가 존재하지 않으면 그대로 POST만 저장
         if form.is_valid():
             post = form.save(commit=False)  # default commit=True 설정, False시 save 호출 작동 안함(저장 안됌)
-            post.author = request.user #현재 로그인 유저
+            post.author = request.user  # 현재 로그인 유저
             post.save()
+            messages.success(request, "포스팅을 저장했습니다.")
             return redirect(post)
     else:
         form = PostForm()
@@ -26,13 +28,15 @@ def post_new(request):
     })
 
 
-# @login_required #함수형
+# @login_required  # 함수형
 # def post_list(request):
 #     post_set = Post.objects.all()
 #     q = request.GET.get('q', '')
 #
 #     if q:
 #         post_set = post_set.filter(message__icontains=q)
+#
+#     # messages.info(request, "message test")
 #     return render(request, 'instagram/post_list.html', {
 #         'post_list': post_set,
 #         'q': q,
@@ -117,16 +121,17 @@ post_archive_year = YearArchiveView.as_view(model=Post, date_field='created_at',
 def post_edit(request, pk):
     post = get_object_or_404(Post, id=pk)
 
-    #작성자 체크 팁
-    if request.user != post.author: #글쓴이와 현재 로그인 유저가 다를시
-        messages.error(request, '작성자만 수정 가능합니다.') #에러메세지 추가
+    # 작성자 체크 팁
+    if request.user != post.author:  # 글쓴이와 현재 로그인 유저가 다를시
+        messages.error(request, '작성자만 수정 가능합니다.')  # 에러메세지 추가
         return redirect(post)
 
-    #form을 사용시 끝까지 form을 이용해 저장하기 form.cleaned_data['keyName'] / request.POST['keyName'] -> 사용하지 않기
+    # form을 사용시 끝까지 form을 이용해 저장하기 form.cleaned_data['keyName'] / request.POST['keyName'] -> 사용하지 않기
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES, instance=post)  # update시 instance= 로 모델 인스턴스 전달
         if form.is_valid():
             post = form.save()  # default commit=True 설정, False시 save 호출 작동 안함(저장 안됌)
+            messages.success(request, "포스팅을 저장했습니다.")
             return redirect(post)
     else:
         form = PostForm(instance=post)
