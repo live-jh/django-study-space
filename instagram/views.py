@@ -24,7 +24,8 @@ def post_new(request):
     else:
         form = PostForm()
     return render(request, 'instagram/post_form.html', {
-        'form': form
+        'form': form,
+        'post': None,
     })
 
 
@@ -136,5 +137,6 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'instagram/post_form.html', {
-        'form': form
+        'form': form,
+        'post': post,
     })
