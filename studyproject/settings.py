@@ -144,3 +144,10 @@ INTERNAL_IPS = ['127.0.0.1']
 
 # user model setting
 # AUTH_USER_MODEL = 'instagram.User'
+
+from django.contrib.messages import constants as messages_contants
+
+MESSAGE_TAGS = {
+    messages_contants.DEBUG: 'secondary',
+    messages_contants.ERROR: 'danger',
+}
