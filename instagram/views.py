@@ -169,7 +169,7 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         messages.success(self.request, '포스팅을 수정하였습니다.')
-        return super().form_valid(form)
+        return super().form_valid(form) #html {{form}}
 
 
 post_edit = PostUpdateView.as_view()

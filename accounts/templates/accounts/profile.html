@@ -1,0 +1,18 @@
+{% extends 'accounts/layout.html' %}
+
+{% block content %}
+    <!-- user : 로그인 유저 모델 인스턴스, 로그아웃: anonymousUser(파이썬 클래스)-->
+    <h2>User : {{ user }}</h2> <!-- settings.py의 'django.contrib.auth.context_processors.auth' 참 -->
+    {% if user.profile %}
+        <ul>
+            <li>주소 : {{ user.profile.address }}</li>
+            <li>우편번호 : {{ user.profile.zipcode }}</li>
+        </ul>
+    {% endif %}
+    <a href="{% url 'profile_edit' %}" class="btn btn-secondary">프로필 수정</a>
+{#    {{ user.profile.address }} <br><!-- user객체와 1:1 매핑 model Profile -->#}
+{#    {{ user.is_authenticated }} <br>#}
+{#    {{ user.is_anonymous }}<br>#}
+{#    {{ user.user_permissions }}<br>#}
+{#    {{ user.groups }}<br>#}
+{% endblock content %}
