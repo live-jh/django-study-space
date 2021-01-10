@@ -16,4 +16,5 @@
     <hr>
     <a href="{% url "instagram:post_list" %}" class="btn btn-primary">목록</a>
     <a href="{% url "instagram:post_edit" post.pk %}" class="btn btn-success">수정</a>
+    <a href="{% url "instagram:post_delete" post.pk %}" class="btn btn-danger">삭제</a>
 {% endblock content %}
