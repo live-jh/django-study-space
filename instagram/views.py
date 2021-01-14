@@ -5,9 +5,15 @@ from rest_framework.viewsets import ModelViewSet
 
 from .models import Post
 from .serializers import PostSerializer
+from rest_framework.response import Response
 
 
 # 2개의 url을 생성해줌 (/post/, /post/pk/)
 class PostViewSet(ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+    def dispatch(self, request, *args, **kwargs):
+        print('request.body -> ', request.body)
+        print('request.POST -> ', request.POST)
+        return super().dispatch(request, *args, **kwargs)
