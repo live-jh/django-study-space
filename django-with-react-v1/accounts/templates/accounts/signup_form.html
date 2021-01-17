@@ -1,0 +1,14 @@
+{% extends 'accounts/layout.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+    <div class="col-sm-6">
+        <form method="post" action=""> <!-- form 으로 전달 -->
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button class="btn btn-primary">회원가입</button>
+            {% endbuttons %}
+        </form>
+    </div>
+{% endblock content %}
