@@ -45,10 +45,10 @@ def profile_edit(request):
 
 
 class SignupView(CreateView):
-    model = User,
-    form_class = UserCreationForm,
-    success_url = settings.LOGIN_REDIRECT_URL,
-    template_name = 'accounts/signup_form.html',
+    model = User
+    form_class = UserCreationForm
+    success_url = settings.LOGIN_REDIRECT_URL
+    template_name = 'accounts/signup_form.html'
 
     def form_valid(self, form): #django->views->generic->edit.py 참고 (ModelFormMixin에선 유효성 save 후 반환)
         response = super().form_valid(form)
