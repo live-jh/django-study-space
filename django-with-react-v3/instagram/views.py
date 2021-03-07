@@ -37,6 +37,11 @@ from .models import Post
 class PostViewSet(ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    # authentication_calsses = [] # rest_framework에 인증처리
+
+    # 저장로직 (post)
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user, ip=self.request.META['REMOTE_ADDR'])
 
     # ViewSet에 새로운 EndPoint
     @action(detail=False, methods=['GET'])
@@ -96,4 +101,4 @@ class PostDetailAPIView(RetrieveAPIView):
         post = self.get_object()  # get_object는 RetrieveAPIView 내에서 구현이 되어 있음
         return Response({
             'post': PostSerializer(post).data
-        }) #Response 2번째 인자로 template_name 넘겨줘도 됌
+        })  # Response 2번째 인자로 template_name 넘겨줘도 됌
