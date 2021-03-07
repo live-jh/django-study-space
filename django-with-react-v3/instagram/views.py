@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics
 from rest_framework.decorators import api_view, action
+from rest_framework.generics import RetrieveAPIView
+from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
@@ -71,6 +73,7 @@ class PostViewSet(ModelViewSet):
         print(request.POST)  # logger
         return super().dispatch(request, *args, **kwargs)
 
+
 # @csrf_exempt  # 장식자
 # def post_list(request):
 #     pass#
@@ -82,3 +85,15 @@ class PostViewSet(ModelViewSet):
 
 # def post_detail(request, id):
 #     pass
+
+
+class PostDetailAPIView(RetrieveAPIView):
+    queryset = Post.objects.all()
+    renderer_classes = [TemplateHTMLRenderer]  # Renderer를 사용해 아래 template으로 출력
+    template_name = 'instagram/post_detail.html'
+
+    def get(self, request, *args, **kwargs):
+        post = self.get_object()  # get_object는 RetrieveAPIView 내에서 구현이 되어 있음
+        return Response({
+            'post': PostSerializer(post).data
+        }) #Response 2번째 인자로 template_name 넘겨줘도 됌
