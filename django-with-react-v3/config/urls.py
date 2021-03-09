@@ -18,6 +18,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api-auth', include('rest_framework.urls')),  # auth의 login & logout 활용
+    path('api-auth/', include('rest_framework.urls')),  # auth의 login & logout 활용
+    path('accounts/', include('accounts.urls')),  # auth의 login & logout 활용
     path('', include('instagram.urls'))  # auth의 login & logout 활용
 ]

@@ -78,8 +78,8 @@ class PostViewSet(ModelViewSet):
     #     pass
 
     def dispatch(self, request, *args, **kwargs):
-        print(request.body)  # logger
-        print(request.POST)  # logger
+        # print(request.body)  # logger
+        # print(request.POST)  # logger
         return super().dispatch(request, *args, **kwargs)
 
 
