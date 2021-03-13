@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'instagram',
     'rest_framework.authtoken',
-    'djangorestframework-jwt',
 ]
 
 MIDDLEWARE = [
@@ -138,6 +137,6 @@ REST_FRAMEWORK = {
     },
 }
 
-# JWT_AUTH = {
-#     'JWT_ALLOW_REFRESH': True
-# }
+JWT_AUTH = {
+    'JWT_ALLOW_REFRESH': True
+}
